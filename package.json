@@ -1,0 +1,21 @@
+{
+	"name": "library",
+	"version": "1.0.0",
+	"description": "The best app",
+	"main": "app.js",
+	"type": "module",
+	"scripts": {
+		"start": "live-server",
+		"build": "rollup -c"
+	},
+	"author": "andrxw66",
+	"license": "MIT",
+	"devDependencies": {
+		"@rollup/plugin-node-resolve": "^15.0.1",
+		"eslint": "^8.36.0",
+		"prettier": "2.8.7",
+		"rollup": "^3.20.2",
+		"rollup-plugin-import-css": "^3.2.1"
+	},
+	"dependencies": {}
+}
