@@ -17,5 +17,7 @@
 		"rollup": "^3.20.2",
 		"rollup-plugin-import-css": "^3.2.1"
 	},
-	"dependencies": {}
+	"dependencies": {
+		"on-change": "^4.0.2"
+	}
 }
