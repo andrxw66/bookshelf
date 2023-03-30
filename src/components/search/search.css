@@ -29,10 +29,9 @@
 .search__input::placeholder {
 	color: #3c3c3c;
 }
-
-.btn {
+.search button {
 	border: none;
-	background: #000;
+	background: var(--black);
 	border-radius: 5px;
 	display: flex;
 	align-items: center;

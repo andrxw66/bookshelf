@@ -21,7 +21,7 @@ export class Search extends DivComponent {
 				}''/>
 				<img src='/static/search.svg' alt='Search icon'/>
 			</div>
-			<button aria-label='Search' class='btn'>
+			<button aria-label='Search'>
 				<img src='/static/search-big.svg' alt='Search icon'/>
 			</button>
 		`
