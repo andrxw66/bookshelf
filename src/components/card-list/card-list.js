@@ -16,12 +16,11 @@ export class CardList extends DivComponent {
 			`
 			return this.el
 		}
-		this.el.classList.add('card__list')
-		this.el.innerHTML = `
-			<h1>Book found: ${this.parentState.numFound}</h1>
-		`
+		const cardGrid = document.createElement('div')
+		cardGrid.classList.add('card__grid')
+		this.el.append(cardGrid)
 		for (const card of this.parentState.list) {
-			this.el.append(new Card(this.appState, card).render())
+			cardGrid.append(new Card(this.appState, card).render())
 		}
 		return this.el
 	}

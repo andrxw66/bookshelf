@@ -8,6 +8,16 @@ export class Card extends DivComponent {
 		this.cardState = cardState
 	}
 
+	#addToFavorites() {
+		this.appState.favorites.push(this.cardState)
+	}
+
+	#deleteFromFavorites() {
+		this.appState.favorites = this.appState.favorites.filter(
+			b => b.key !== this.cardState.key
+		)
+	}
+
 	render() {
 		this.el.classList.add('card')
 		const isExistInFavorites = this.appState.favorites.find(
@@ -26,7 +36,7 @@ export class Card extends DivComponent {
 				<div class='card__name'>
 					${this.cardState.title}
 				</div>
-				<div class='card__author'>
+				<div class='card__author'> 
 					${this.cardState.author_name ? this.cardState.author_name[0] : 'No author'}
 				</div>
 				<div class='card__footer'>
@@ -40,7 +50,15 @@ export class Card extends DivComponent {
 				</div>
 			</div>
 		`
-
+		if (isExistInFavorites) {
+			this.el
+				.querySelector('button')
+				.addEventListener('click', this.#deleteFromFavorites.bind(this))
+		} else {
+			this.el
+				.querySelector('button')
+				.addEventListener('click', this.#addToFavorites.bind(this))
+		}
 		return this.el
 	}
 }

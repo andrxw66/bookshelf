@@ -2,6 +2,7 @@ import onChange from 'on-change'
 import { AbstractView } from '../../common/view.js'
 import { CardList } from '../../components/card-list/card-list.js'
 import { Header } from '../../components/header/header.js'
+import { Pagination } from '../../components/pagination/pagination.js'
 import { Search } from '../../components/search/search.js'
 
 export class MainView extends AbstractView {
@@ -20,9 +21,14 @@ export class MainView extends AbstractView {
 		this.setTitle('Book search')
 	}
 
+	destroy() {
+		onChange.unsubscribe(this.appState)
+		onChange.unsubscribe(this.state)
+	}
+
 	appStateHook(path) {
 		if (path === 'favorites') {
-			console.log(path)
+			this.render()
 		}
 	}
 
@@ -37,7 +43,15 @@ export class MainView extends AbstractView {
 			this.state.numFound = data.numFound
 			this.state.list = data.docs
 		}
-
+		if (path === 'offset') {
+			this.state.loading = true
+			const data = await this.loadList(
+				this.state.searchQuery,
+				this.state.offset
+			)
+			this.state.loading = false
+			this.state.list = data.docs
+		}
 		if (path === 'list' || path === 'loading') {
 			this.render()
 		}
@@ -45,15 +59,21 @@ export class MainView extends AbstractView {
 
 	async loadList(q, offset) {
 		const res = await fetch(
-			`https://openlibrary.org/search.json?q=${q}&offset=${offset}`
+			`https://openlibrary.org/search.json?q=${q}&offset=${offset}&limit=${10}`
 		)
 		return res.json()
 	}
 
 	render() {
 		const main = document.createElement('div')
+		main.innerHTML = `
+			<h1>Book found: ${this.state.numFound}</h1>
+		`
 		main.append(new Search(this.state).render())
 		main.append(new CardList(this.appState, this.state).render())
+		if (this.state.numFound !== 0) {
+			main.append(new Pagination(this.state).render())
+		}
 		this.app.innerHTML = ''
 		this.app.append(main)
 		this.renderHeader()

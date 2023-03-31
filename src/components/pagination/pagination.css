@@ -1,0 +1,28 @@
+.pagination {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 30px;
+}
+.reverse__arrow {
+	rotate: 180deg;
+}
+.pagination__button {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	border: none;
+	padding: 10px;
+	gap: 10px;
+	cursor: pointer;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 20px;
+	background: transparent;
+	color: var(--black);
+}
+.pagination__button:disabled {
+	cursor: default;
+	color: #b8b8b8;
+}
